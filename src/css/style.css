@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BASE STYLES */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: theme('colors.surface-light');
+    color: #1c1917;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* GRID BACKGROUND */
+.bg-grid {
+    background-size: 40px 40px;
+    background-image:
+        linear-gradient(to right, rgba(28, 25, 23, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(28, 25, 23, 0.05) 1px, transparent 1px);
+}
+
+#hero-canvas {
+    mask-image: linear-gradient(to bottom, rgb(78, 77, 77) 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* BEAM BUTTON ANIMATION */
+@keyframes borderRotate {
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.btn-beam {
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.btn-beam::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    background: conic-gradient(from 90deg at 50% 50%, #E2E8F0 0%, #000000 50%, #E2E8F0 100%);
+    animation: spin 4s linear infinite;
+    border-radius: inherit;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.btn-beam:hover::before {
+    opacity: 1;
+}
+
+.btn-beam-content {
+    background-color: #1c1917;
+    color: white;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* FLASHLIGHT EFFECT */
+.flashlight-card {
+    background: rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.flashlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            rgba(255, 255, 255, 0.9),
+            transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.flashlight-card:hover::before {
+    opacity: 1;
+}
+
+/* TEXT REVEAL WRAPPER */
+.text-reveal-wrapper {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
+}
+
+.text-reveal-content {
+    display: inline-block;
+    transform: translateY(110%);
+}
+
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: theme('colors.surface-light');
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d6d3d1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a29e;
+}
+
+.video-overlay-gradient {
+    background: linear-gradient(90deg, theme('colors.surface-light') 0%, rgba(234, 234, 229, 0.05) 50%, theme('colors.surface-light') 100%),
+        linear-gradient(180deg, rgba(234, 234, 229, 0.2) 0%, rgba(234, 234, 229, 0) 20%, rgba(234, 234, 229, 0) 80%, theme('colors.surface-light') 100%);
+}
+
+#hero-canvas {
+    opacity: 1 !important;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Animação Contínua de Balanço para a Caneta */
+@keyframes swayPen {
+    0%,
+    100% {
+        transform: rotate(-60deg) translateY(0px) translateX(0px);
+    }
+    50% {
+        transform: rotate(-58deg) translateY(-10px) translateX(-6px);
+    }
+}
+
+.animate-sway {
+    animation: swayPen 5s ease-in-out infinite;
+}
+
+/* Marquee Animation from Design System */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+}
+
+/* Animations for glowing box */
+@keyframes shimmer {
+    from {
+        transform: translateX(-100%) skewX(-15deg);
+    }
+    to {
+        transform: translateX(200%) skewX(-15deg);
+    }
+}
+
+/* A11Y CSS - Foco de Teclado & SR-ONLY */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 2px solid #1c1917;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+button.rounded-full:focus-visible,
+.btn-beam:focus-visible {
+    border-radius: 9999px;
+    outline-offset: 6px;
+}
