@@ -58,6 +58,7 @@ export async function preloadImages() {
             if (i === 0) {
                 render();
                 initGSAP();
+                introTimeline.play(); // Desbloqueia os textos e a LCP instantaneamente!
             }
         }).catch(() => {
             loadedCount++;
@@ -71,8 +72,6 @@ export async function preloadImages() {
     loaderBar.style.transition = "opacity 0.3s";
     loaderBar.style.opacity = "0";
     setTimeout(() => loaderBar.remove(), 300);
-
-    introTimeline.play();
 }
 
 export function initGSAP() {
