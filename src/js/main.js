@@ -114,10 +114,5 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Inicia Canvas
-    preloadImages();
 
-    // Inicia Carrosséis
-    initHeroCarousel();
-    initTechCarousel();
 });

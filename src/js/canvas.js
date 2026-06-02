@@ -20,11 +20,8 @@ introTimeline.to(".hero-text", {
         ease: "power2.out"
     }, "-=0.8");
 
-const canvas = document.getElementById("hero-canvas");
+let canvas = null;
 let ctx = null;
-if (canvas) {
-    ctx = canvas.getContext("2d");
-}
 
 const frameCount = 192;
 const currentFrame = index => {
@@ -36,6 +33,10 @@ const images = [];
 const airpods = { frame: 0 };
 
 export async function preloadImages() {
+    canvas = document.getElementById("hero-canvas");
+    if (canvas) {
+        ctx = canvas.getContext("2d");
+    }
     if (!canvas || !ctx) return;
     
     const loaderBar = document.createElement("div");
