@@ -114,5 +114,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Lazy loading do vídeo de tecnologia com IntersectionObserver
+    const techVideo = document.getElementById('tech-video');
+    const techSection = document.getElementById('tecnologia');
+
+    if (techVideo && techSection) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    techVideo.play().catch(err => console.log("Autoplay bloqueado:", err));
+                    videoObserver.unobserve(techSection); // Desativa o observer após o primeiro trigger
+                }
+            });
+        }, { rootMargin: '200px' }); // Inicia o download 200px antes da seção entrar na tela
+
+        videoObserver.observe(techSection);
+    }
 
 });
