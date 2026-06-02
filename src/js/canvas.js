@@ -1,6 +1,8 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+gsap.registerPlugin(ScrollTrigger);
+
 // Initial Load Animations
 export const introTimeline = gsap.timeline({ delay: 0.1, paused: true });
 

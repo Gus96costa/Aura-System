@@ -6,12 +6,19 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { createIcons, icons } from 'lucide';
 
+gsap.registerPlugin(ScrollTrigger);
+
 window.goTechSlide = goTechSlide;
 
 document.addEventListener("DOMContentLoaded", () => {
     
     // Init Icons
     createIcons({ icons });
+
+    // Initialize modules
+    preloadImages();
+    initHeroCarousel();
+    initTechCarousel();
 
     // Flashlight effect logic
     window.updateFlashlight = function(e, card) {
