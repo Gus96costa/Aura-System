@@ -38,6 +38,9 @@ export async function preloadImages() {
         ctx = canvas.getContext("2d");
     }
     if (!canvas || !ctx) return;
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
     
     const loaderBar = document.createElement("div");
     loaderBar.style.cssText = "position: fixed; top: 0; left: 0; width: 0%; height: 1px; background-color: #1c1917; z-index: 99999; transition: width 0.1s; pointer-events: none;";
@@ -103,14 +106,18 @@ export function initGSAP() {
     }, 0.5);
 }
 
-export function render() {
-    if (!ctx) return;
-    const img = images[airpods.frame];
-    if (!img || !img.complete || img.naturalWidth === 0) return;
-
+export function resizeCanvas() {
+    if (!canvas || !ctx) return;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
+    render();
+}
+
+export function render() {
+    if (!canvas || !ctx) return;
+    const img = images[airpods.frame];
+    if (!img || !img.complete || img.naturalWidth === 0) return;
 
     const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
     const x = (canvas.width / 2) - (img.width / 2) * scale;

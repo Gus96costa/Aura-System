@@ -24,7 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Flashlight effect logic
     window.updateFlashlight = function(e, card) {
-        const rect = card.getBoundingClientRect();
+        if (!card._rectCache) {
+            card._rectCache = card.getBoundingClientRect();
+            card.addEventListener('mouseleave', () => { card._rectCache = null; }, { once: true });
+        }
+        const rect = card._rectCache;
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         card.style.setProperty('--mouse-x', `${x}px`);
