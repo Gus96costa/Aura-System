@@ -50,8 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     gsap.ticker.lagSmoothing(0, 0);
 
-    gsap.registerPlugin(ScrollTrigger);
-
     // Header Transparency on Scroll
     const mainHeader = document.getElementById('main-header');
     if(mainHeader) {

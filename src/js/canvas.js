@@ -68,6 +68,7 @@ export async function preloadImages() {
     }
 
     await Promise.allSettled(promises);
+    ScrollTrigger.refresh(); // Força o recalculo perfeito de posições após o payload assíncrono
 
     loaderBar.style.transition = "opacity 0.3s";
     loaderBar.style.opacity = "0";
