@@ -1,5 +1,6 @@
 import gsap from 'gsap';
-import { createIcons, icons } from 'lucide';
+import { createIcons, PenTool, Settings2, Zap, Orbit, Fingerprint, Spline, ShieldCheck, Infinity } from 'lucide';
+const carouselIcons = { PenTool, Settings2, Zap, Orbit, Fingerprint, Spline, ShieldCheck, Infinity };
 
 export const heroCarouselData = [
     {
@@ -87,7 +88,7 @@ export function updateHeroCarousel(index) {
                 document.getElementById("hero-card-desc").innerText = data.desc;
                 document.getElementById("hero-card-stats").innerHTML = data.statsHTML;
                 document.getElementById("hero-card-icon").innerHTML = `<i data-lucide="${data.icon}" aria-hidden="true" class="w-5 h-5"></i>`;
-                createIcons({ icons });
+                createIcons({ icons: carouselIcons });
 
                 gsap.to(contentContainer, {
                     opacity: 1,
@@ -102,7 +103,7 @@ export function updateHeroCarousel(index) {
         document.getElementById("hero-card-desc").innerText = data.desc;
         document.getElementById("hero-card-stats").innerHTML = data.statsHTML;
         document.getElementById("hero-card-icon").innerHTML = `<i data-lucide="${data.icon}" aria-hidden="true" class="w-5 h-5"></i>`;
-        createIcons({ icons });
+        createIcons({ icons: carouselIcons });
     }
 
     currentHeroCardIndex = index;
@@ -185,7 +186,7 @@ export function initTechCarousel() {
 
         techCards = document.querySelectorAll(".tech-carousel-card");
 
-        createIcons({ icons });
+        createIcons({ icons: carouselIcons });
 
         setTimeout(() => goTechSlide(2, true), 100);
         window.addEventListener("resize", () => goTechSlide(techCurrentIndex, true));

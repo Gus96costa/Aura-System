@@ -4,7 +4,9 @@ import { initHeroCarousel, initTechCarousel, goTechSlide } from './carousel.js';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import { createIcons, icons } from 'lucide';
+import { createIcons, ArrowRight, PenTool, Crosshair, Zap, Shield, Settings, Droplet, Asterisk, Orbit, Fingerprint, Spline, ShieldCheck, ArrowLeft, Infinity, CircleDot } from 'lucide';
+const usedIcons = { ArrowRight, PenTool, Crosshair, Zap, Shield, Settings, Droplet, Asterisk, Orbit, Fingerprint, Spline, ShieldCheck, ArrowLeft, Infinity, CircleDot };
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +15,7 @@ window.goTechSlide = goTechSlide;
 document.addEventListener("DOMContentLoaded", () => {
     
     // Init Icons
-    createIcons({ icons });
+    createIcons({ icons: usedIcons });
 
     // Initialize modules
     preloadImages();
