@@ -141,6 +141,8 @@ export let techDotsElems = [];
 export let techCarouselTimer;
 export let originalCount = 0;
 export let isAnimating = false;
+let cardDimensionsCache = [];
+
 
 export function initTechCarousel() {
     techTrack = document.getElementById("tech-carousel-track");
@@ -185,11 +187,27 @@ export function initTechCarousel() {
         techTrack.append(first1, first2);
 
         techCards = document.querySelectorAll(".tech-carousel-card");
+        cardDimensionsCache = Array.from(techCards).map(card => ({
+            left: card.offsetLeft,
+            width: card.offsetWidth
+        }));
 
         createIcons({ icons: carouselIcons });
 
-        setTimeout(() => goTechSlide(2, true), 100);
-        window.addEventListener("resize", () => goTechSlide(techCurrentIndex, true));
+        setTimeout(() => {
+            cardDimensionsCache = Array.from(techCards).map(card => ({
+                left: card.offsetLeft,
+                width: card.offsetWidth
+            }));
+            goTechSlide(2, true);
+        }, 100);
+        window.addEventListener("resize", () => {
+            cardDimensionsCache = Array.from(techCards).map(card => ({
+                left: card.offsetLeft,
+                width: card.offsetWidth
+            }));
+            goTechSlide(techCurrentIndex, true);
+        });
     }
 
     if (techPrev) techPrev.addEventListener("click", () => goTechSlide(techCurrentIndex - 1));
@@ -226,8 +244,9 @@ export function goTechSlide(index, instant = false) {
     const cardElement = techCards[index];
     if(!cardElement) return;
     
-    const cardLeft = cardElement.offsetLeft;
-    const cardWidth = cardElement.offsetWidth;
+    const cachedDims = cardDimensionsCache[index] || { left: cardElement.offsetLeft, width: cardElement.offsetWidth };
+    const cardLeft = cachedDims.left;
+    const cardWidth = cachedDims.width;
     const targetX = centerX - cardLeft - (cardWidth / 2);
 
     if (instant) {
