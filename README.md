@@ -19,23 +19,23 @@ This architecture was built defensively against performance degradation. Every i
 | Core Web Vital | Measured Value | Optimization Strategy |
 | :--- | :--- | :--- |
 | **LCP** (Largest Contentful Paint) | `0.7s` | Image preloading & critical path CSS isolation |
-| **CLS** (Cumulative Layout Shift) | `0.0` | Rigid aspect-ratio bounding boxes & component isolation[cite: 1] |
-| **Performance Score** | `99+` | Zero layout thrashing & optimized main-thread execution[cite: 1] |
+| **CLS** (Cumulative Layout Shift) | `0.0` | Rigid aspect-ratio bounding boxes & component isolation |
+| **Performance Score** | `99+` | Zero layout thrashing & optimized main-thread execution |
 
 ---
 
 ## 🛠️ Core Engineering & Technical Stack
 
-*   **Creative Layer:** GSAP (GreenSock) + ScrollTrigger for ultra-fluid, hardware-accelerated parallax and scroll-bound animations[cite: 1].
-*   **Rendering Engine:** HTML5 Canvas sequencing driving a custom 192-frame cinematic animation loop[cite: 1].
-*   **Layout Framework:** Tailwind CSS for low-overhead, utility-first structural styling[cite: 1].
-*   **Build Tooling & Deploy:** Vite-powered bundling deployed seamlessly on Vercel's Edge Network[cite: 1].
+*   **Creative Layer:** GSAP (GreenSock) + ScrollTrigger for ultra-fluid, hardware-accelerated parallax and scroll-bound animations.
+*   **Rendering Engine:** HTML5 Canvas sequencing driving a custom 192-frame cinematic animation loop.
+*   **Layout Framework:** Tailwind CSS for low-overhead, utility-first structural styling.
+*   **Build Tooling & Deploy:** Vite-powered bundling deployed seamlessly on Vercel's Edge Network.
 
 ---
 
 ## 🔬 Deep Dive: Canvas Sequence & Frame Optimization
 
-The center piece of Aura System is its custom 192-frame scroll-driven canvas sequence[cite: 1]. Standard video tags or unoptimized image arrays induce massive garbage collection overhead and layout thrashing[cite: 1]. 
+The center piece of Aura System is its custom 192-frame scroll-driven canvas sequence. Standard video tags or unoptimized image arrays induce massive garbage collection overhead and layout thrashing. 
 
 To achieve a consistent **60fps / 120fps fluid execution**, the system utilizes a specialized preloading pipeline:
 
