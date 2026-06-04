@@ -8,7 +8,7 @@
 
 A high-fidelity creative front-end application engineered for luxury digital environments. This project showcases advanced layout orchestration, cutting-edge cinematic sequences, and rigorous runtime optimizations designed to sustain exceptional visual fidelity without compromising core performance metrics.
 
-🚀 **Live Production Link:** [Aura System Demo](https://aura-system-iota.vercel.app/)[cite: 1]
+🚀 **Live Production Link:** [Aura System Demo](https://aura-system-iota.vercel.app/)
 
 ---
 
